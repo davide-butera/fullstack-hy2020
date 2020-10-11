@@ -66,16 +66,14 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   return (
-    <div>
-      <Statistics
-        good={good}
-        setGood={setGood}
-        neutral={neutral}
-        setNeutral={setNeutral}
-        bad={bad}
-        setBad={setBad}
-      />
-    </div>
+    <Statistics
+      good={good}
+      setGood={setGood}
+      neutral={neutral}
+      setNeutral={setNeutral}
+      bad={bad}
+      setBad={setBad}
+    />
   );
 };
 

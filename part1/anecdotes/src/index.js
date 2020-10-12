@@ -5,6 +5,15 @@ const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
+const Section = (props) => {
+  return (
+    <>
+      <h1>{props.title}</h1>
+      <p>{props.anecdotes[props.index]}</p>
+      <p>has {props.points[props.index]} votes</p>
+    </>
+  );
+};
 const App = (props) => {
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0));
@@ -24,14 +33,20 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Anecdote of the day</h1>
-      <p>{props.anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
+      <Section
+        title={"Anecdote of the day"}
+        index={selected}
+        anecdotes={anecdotes}
+        points={points}
+      />
       <Button handleClick={Vote} text="vote" />
       <Button handleClick={Next} text="next anecdote" />
-      <h1>Anecdote with most votes</h1>
-      <p>{props.anecdotes[mostVoted]}</p>
-      <p>has {points[mostVoted]} votes</p>
+      <Section
+        title={"Anecdote of the day"}
+        index={mostVoted}
+        anecdotes={anecdotes}
+        points={points}
+      />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React from 'react'
 import Country from './Country'
 
@@ -19,6 +18,7 @@ const Countries = ({ countries, search, setSearch }) => {
             <li key={country.name}>
               {country.name}
               <button
+                type="button"
                 onClick={() => {
                   setSearch(country.name)
                 }}
@@ -38,5 +38,3 @@ const Countries = ({ countries, search, setSearch }) => {
 }
 
 export default Countries
-
-/*      */

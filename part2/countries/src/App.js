@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Countries from './components/Countries'
-
-import Filter from './components/Filter'
+import SearchBar from './components/SearchBar'
 
 const App = () => {
   const [countries, setCountries] = useState([])
@@ -22,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <Filter {...{ search, searchName }} />
+      <SearchBar {...{ search, searchName }} />
       <Countries {...{ countries, search, setSearch }} />
     </div>
   )

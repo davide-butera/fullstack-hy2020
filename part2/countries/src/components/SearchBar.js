@@ -1,7 +1,7 @@
 import React from 'react'
 
 // eslint-disable-next-line react/prop-types
-const Filter = ({ search, searchName }) => {
+const SearchBar = ({ search, searchName }) => {
   return (
     <form>
       <div>
@@ -11,4 +11,4 @@ const Filter = ({ search, searchName }) => {
   )
 }
 
-export default Filter
+export default SearchBar

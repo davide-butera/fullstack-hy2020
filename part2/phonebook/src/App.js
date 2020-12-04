@@ -18,6 +18,7 @@ const App = () => {
       console.log('promise fulfilled')
       setPersons(response.data)
     })
+    
   }
 
   useEffect(hook, [])
@@ -31,10 +32,18 @@ const App = () => {
         name: newName,
         number: newNumber,
       }
-      setPersons(persons.concat(noteObject))
-      setNewName("")
+
+      axios
+      .post('http://localhost:3001/persons', noteObject)
+      .then(response => {
+        setPersons(persons.concat(noteObject))
+        setNewName("")
       setNewNumber("")
+      })
+      
+      
     }
+    
   }
 
   // eslint-disable-next-line no-shadow

@@ -23,7 +23,17 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     if (persons.find((person) => person.name === newName) !== undefined) {
-      window.alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const person = persons.find((x) => x.name === newName)
+
+        const changedPerson = { ...person, number: newNumber }
+
+        personService
+          .update(person.id, changedPerson)
+          .then((response) => {
+            setPersons(persons.map((a) => (a.id !== person.id ? a : response.data)))
+          })
+      }
     } else {
       const noteObject = {
         name: newName,
@@ -37,6 +47,13 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+    }
+  }
+
+  const deleteName = (person) => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService.deleteName(person.id)
+      setPersons(persons.filter((n) => n.id !== person.id))
     }
   }
 
@@ -72,7 +89,7 @@ const App = () => {
           addName,
         }}
       />
-      <Persons {...{ contactsToShow }} />
+      <Persons {...{ contactsToShow, deleteName }} />
     </div>
   )
 }

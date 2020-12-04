@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from "react"
+import React from 'react'
 
-const Person = ({ name, number }) => {
-  return (
-    <li>
-      {name} {number}
-    </li>
-  )
-}
+const Person = ({ name, number }) => (
+  <li>
+    {name}
+    {' '}
+    {number}
+  </li>
+)
 
 export default Person

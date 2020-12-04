@@ -1,27 +1,24 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react"
-import Filter from "./components/Filter"
-import PersonForm from "./components/PersonForm"
-import Persons from "./components/Persons"
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
-  const [newName, setNewName] = useState("")
-  const [newNumber, setNewNumber] = useState("")
-  const [search, setSearch] = useState("")
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [search, setSearch] = useState('')
 
-  const hook = () => {
-    console.log('effect')
-    axios.get('http://localhost:3001/persons').then((response) => {
-      console.log('promise fulfilled')
-      setPersons(response.data)
-    })
-    
-  }
-
-  useEffect(hook, [])
+  useEffect(() => {
+    personService
+      .getAll()
+      .then((response) => {
+        setPersons(response.data)
+      })
+  }, [])
 
   const addName = (event) => {
     event.preventDefault()
@@ -33,26 +30,20 @@ const App = () => {
         number: newNumber,
       }
 
-      axios
-      .post('http://localhost:3001/persons', noteObject)
-      .then(response => {
-        setPersons(persons.concat(noteObject))
-        setNewName("")
-      setNewNumber("")
-      })
-      
-      
+      personService
+        .create(noteObject)
+        .then((response) => {
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+        })
     }
-    
   }
 
   // eslint-disable-next-line no-shadow
-  const contactsToShow =
-    search === ""
-      ? persons
-      : persons.filter((person) =>
-          person.name.toLowerCase().includes(search.toLowerCase())
-        )
+  const contactsToShow = search === ''
+    ? persons
+    : persons.filter((person) => person.name.toLowerCase().includes(search.toLowerCase()))
 
   const searchName = (event) => {
     setSearch(event.target.value)

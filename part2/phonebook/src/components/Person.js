@@ -7,7 +7,7 @@ const Person = ({ name, number, deleteName }) => (
     {' '}
     {number}
     {' '}
-    <button type="button" onClick={deleteName}> remove</button>
+    <button type="button" onClick={deleteName}>delete</button>
   </li>
 )
 
